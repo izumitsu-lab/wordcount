@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字数カウンター</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 0.5rem;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+        .count-info {
+            text-align: left;
+            margin-top: 1rem;
+        }
+        .count-info p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .count {
+            font-weight: bold;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>詳細な文字数カウンター</h1>
+        <textarea id="text-input" placeholder="ここにテキストを入力してください..."></textarea>
+        <div class="count-info">
+            <p>総文字数（空白含む）: <span id="total-count" class="count">0</span></p>
+            <p>空白を除いた文字数: <span id="non-space-count" class="count">0</span></p>
+            <p>空白文字の数: <span id="space-count" class="count">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const totalCount = document.getElementById('total-count');
+        const nonSpaceCount = document.getElementById('non-space-count');
+        const spaceCount = document.getElementById('space-count');
+
+        textInput.addEventListener('input', function() {
+            const text = this.value;
+            const total = text.length;
+            const spaces = (text.match(/\s/g) || []).length;
+            const nonSpace = total - spaces;
+
+            totalCount.textContent = total;
+            nonSpaceCount.textContent = nonSpace;
+            spaceCount.textContent = spaces;
+        });
+    </script>
+</body>
+</html>
